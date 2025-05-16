@@ -5,6 +5,9 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { SequelizeConfigService } from './config/services/sequelize-config.service';
 import { SwaggerService } from './config/services/swagger.service';
+import { DepartmentsModule } from './departments/departments.module';
+import { EmployeesModule } from './employees/employees.module';
+import { JobsModule } from './jobs/jobs.module';
 import { SyncModule } from './sync/sync.module';
 
 @Module({
@@ -17,6 +20,9 @@ import { SyncModule } from './sync/sync.module';
     SequelizeModule.forRootAsync({
       useClass: SequelizeConfigService,
     }),
+    EmployeesModule,
+    DepartmentsModule,
+    JobsModule,
     SyncModule,
   ],
   providers: [SwaggerService],
