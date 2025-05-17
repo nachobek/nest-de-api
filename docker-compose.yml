@@ -1,0 +1,23 @@
+services:
+  app:
+    container_name: nest-de-api
+    build: .
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - BATCH_SIZE=${BATCH_SIZE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - API_KEY=${API_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - S3_DEPARTMENTS_FILE_KEY=${S3_DEPARTMENTS_FILE_KEY}
+      - S3_JOBS_FILE_KEY=${S3_JOBS_FILE_KEY}
+      - S3_EMPLOYEES_FILE_KEY=${S3_EMPLOYEES_FILE_KEY}
