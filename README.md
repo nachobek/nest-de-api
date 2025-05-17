@@ -76,6 +76,18 @@ npm run build
 npm run start:prod
 ```
 
+### Running the app with Docker instead.
+
+If you'd rather run the app with Docker.
+
+- Ensure you have the Database running as indicated in step 2.
+- Ensure you have the .env file setup as indicated in step 3.
+- Run the app with the following command:
+
+```bash
+docker compose up -d --build
+```
+
 ## API Documentation
 
 Once the application is running locally, you can access the Swagger API documentation at:
