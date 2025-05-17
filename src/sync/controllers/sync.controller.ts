@@ -1,4 +1,11 @@
-import { BadRequestException, Controller, HttpStatus, Logger, Post, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  HttpStatus,
+  Logger,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { ApiStandardResponseDecorator } from 'src/common/decorators/api-standard-response.decorator';
 import ResponseMessages from 'src/common/enums/response-messages.enum';
@@ -29,7 +36,7 @@ export class SyncController {
       .catch((error) => {
         if (error instanceof BadRequestException) {
           Logger.error(error.message, this.constructor.name);
-        } else{
+        } else {
           Logger.error(ResponseMessages.MANUAL_LOAD_ERROR, this.constructor.name);
         }
       });

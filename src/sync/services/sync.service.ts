@@ -62,7 +62,7 @@ export class SyncService {
       const department: CreateDepartment = {
         id: Number(record.id) || null,
         department: String(record.department),
-      }
+      };
 
       if (
         !department.id ||
@@ -114,7 +114,7 @@ export class SyncService {
       const job: CreateJob = {
         id: Number(record.id) || null,
         job: String(record.job),
-      }
+      };
 
       if (!job.id || isNaN(job.id) || !job.job || !job.job.trim()) {
         Logger.warn(

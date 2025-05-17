@@ -23,17 +23,17 @@ export class EmployeesService {
     );
 
     const [departments, jobs] = await Promise.all([
-      Department.findAll({ where: { id: { [Op.in]: Array.from(uniqueDepartmentIds) } } } ),
-      Job.findAll({ where: { id: { [Op.in]: Array.from(uniqueJobIds) } } } ),
+      Department.findAll({ where: { id: { [Op.in]: Array.from(uniqueDepartmentIds) } } }),
+      Job.findAll({ where: { id: { [Op.in]: Array.from(uniqueJobIds) } } }),
     ]);
 
     if (departments.length !== uniqueDepartmentIds.size) {
-      Logger.error('Invalid departmentId foreing key', this.constructor.name)
+      Logger.error('Invalid departmentId foreing key', this.constructor.name);
       throw new InternalServerErrorException(ResponseMessages.EMPLOYEE_CREATION_ERROR);
     }
 
     if (jobs.length !== uniqueJobIds.size) {
-      Logger.error('Invalid jobId foreing key', this.constructor.name)
+      Logger.error('Invalid jobId foreing key', this.constructor.name);
       throw new InternalServerErrorException(ResponseMessages.EMPLOYEE_CREATION_ERROR);
     }
 
@@ -44,7 +44,7 @@ export class EmployeesService {
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();
-      Logger.error(error, this.constructor.name,);
+      Logger.error(error, this.constructor.name);
       throw new InternalServerErrorException(ResponseMessages.EMPLOYEE_CREATION_ERROR);
     }
   }
