@@ -5,7 +5,7 @@ A REST API built with NestJS, PostgreSQL and Sequelize ORM to load data from csv
 ## Prerequisites
 
 - Node.js (v22.12.0 or higher)
-- npm (v6 or higher)
+- npm (v10 or higher)
 - PostgreSQL (v17 or higher)
 
 ## Getting Started
@@ -39,6 +39,7 @@ Create a `.env` file in the root directory with the following variables:
 # App
 NODE_ENV='' # [local, development, staging, prod]
 PORT='3000'
+BATCH_SIZE=1000 # Default chunk size to pull and load data.
 
 # DB
 DB_USERNAME=''
@@ -49,6 +50,15 @@ DB_PORT='5432'
 
 # Auth
 API_KEY=''
+
+# AWS
+AWS_REGION=''
+AWS_ACCESS_KEY_ID=''
+AWS_SECRET_ACCESS_KEY=''
+S3_BUCKET_NAME=''
+S3_DEPARTMENTS_FILE_KEY='departments.csv'
+S3_JOBS_FILE_KEY='jobs.csv'
+S3_EMPLOYEES_FILE_KEY='hired_employees.csv'
 ```
 
 ### 4. Run the Application
@@ -76,9 +86,12 @@ http://localhost:3000/api-docs
 
 ```
 src/
-├── auth/              # Authentication logic
 ├── common/            # Shared code (filters, guards, base model, etc.)
 ├── config/            # Application configuration
+├── departments/       # Departments module
+├── employees/         # Employees module
+├── external-storages/ # External storages module
+├── jobs/              # Jobs module
 ├── sync/              # Syncronization endpoint to manually execute the data load process
 ├── app.controller.ts  # Main application controller
 ├── app.module.ts      # Main application module
