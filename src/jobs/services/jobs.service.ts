@@ -1,6 +1,7 @@
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import ResponseMessages from 'src/common/enums/response-messages.enum';
+import { CreateJob } from '../interfaces/create-job.interface';
 import { Job } from '../models/job.model';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class JobsService {
     private readonly jobModel: typeof Job,
   ) {}
 
-  async bulkCreate(data: Partial<Job>[]) {
+  async bulkCreate(data: CreateJob[]) {
     const transaction = await this.jobModel.sequelize.transaction();
 
     try {
@@ -18,11 +19,8 @@ export class JobsService {
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();
-      Logger.error(ResponseMessages.JOB_CREATION_ERROR);
-      throw new InternalServerErrorException(
-        ResponseMessages.JOB_CREATION_ERROR,
-        this.constructor.name,
-      );
+      Logger.error(error, this.constructor.name);
+      throw new InternalServerErrorException(ResponseMessages.JOB_CREATION_ERROR);
     }
   }
 }
