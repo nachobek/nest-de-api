@@ -24,12 +24,9 @@ jobs:
             docker stop nest-de-api || true
             docker rm nest-de-api || true
 
-            # Clean the directory and pull the latest code
-            find /home/ec2-user/nest-de-api -mindepth 1 ! -name '.env' -delete
-            git clone https://github.com/nachobek/nest-de-api /home/ec2-user/nest-de-api
-
-            # Navigate to the project directory
+            # Pull the latest code
             cd /home/ec2-user/nest-de-api
+            git pull origin main
 
             # Build the Docker image
             docker build -t nest-de-api .
