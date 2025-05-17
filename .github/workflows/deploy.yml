@@ -1,0 +1,41 @@
+name: Deploy to EC2
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Remove any existing container
+            docker stop nest-de-api || true
+            docker rm nest-de-api || true
+
+            # Clean the directory and pull the latest code
+            find /home/ec2-user/nest-de-api -mindepth 1 ! -name '.env' -delete
+            git clone https://github.com/nachobek/nest-de-api /home/ec2-user/nest-de-api
+
+            # Navigate to the project directory
+            cd /home/ec2-user/nest-de-api
+
+            # Build the Docker image
+            docker build -t nest-de-api .
+
+            # Run the Docker container
+            docker run -d --name nest-de-api -p 3000:3000 --env-file .env nest-de-api
