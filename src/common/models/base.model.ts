@@ -1,7 +1,6 @@
 import { ApiHideProperty } from '@nestjs/swagger';
 import { Sequelize } from 'sequelize';
 import {
-  AutoIncrement,
   Column,
   CreatedAt,
   DataType,
@@ -12,7 +11,7 @@ import {
 } from 'sequelize-typescript';
 
 export class BaseModel extends Model {
-  @AutoIncrement
+  // @AutoIncrement
   @PrimaryKey
   @Column({ allowNull: false, type: DataType.INTEGER })
   id: number;
