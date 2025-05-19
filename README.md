@@ -1,6 +1,8 @@
 # NestJS API Application
 
-A REST API built with NestJS, PostgreSQL and Sequelize ORM to load data from csv files into the database tables.
+A REST API built with NestJS, PostgreSQL and Sequelize ORM.
+This API simulates a database migration scenario.
+It reads the source data in a streaming fashion from .csv files stored in S3 and inserts them in bulk into the corresponding database tables.
 
 ## Prerequisites
 
@@ -37,28 +39,28 @@ Create a `.env` file in the root directory with the following variables:
 
 ```
 # App
-NODE_ENV='' # [local, development, staging, prod]
-PORT='3000'
+NODE_ENV= # [local, development, staging, production]
+PORT=3000
 BATCH_SIZE=1000 # Default chunk size to pull and load data.
 
 # DB
-DB_USERNAME=''
-DB_PASSWORD=''
-DB_DATABASE=''
-DB_HOST=''
-DB_PORT='5432'
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
+DB_HOST=
+DB_PORT=5432
 
 # Auth
-API_KEY=''
+API_KEY=
 
 # AWS
-AWS_REGION=''
-AWS_ACCESS_KEY_ID=''
-AWS_SECRET_ACCESS_KEY=''
-S3_BUCKET_NAME=''
-S3_DEPARTMENTS_FILE_KEY='departments.csv'
-S3_JOBS_FILE_KEY='jobs.csv'
-S3_EMPLOYEES_FILE_KEY='hired_employees.csv'
+AWS_REGION=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+S3_BUCKET_NAME=
+S3_DEPARTMENTS_FILE_KEY=departments.csv
+S3_JOBS_FILE_KEY=jobs.csv
+S3_EMPLOYEES_FILE_KEY=hired_employees.csv
 ```
 
 ### 4. Run the Application
@@ -114,6 +116,9 @@ src/
 
 - RESTful API endpoints
 - Modular approach
-- Light weight Api key based Authentication
+- Api key based Authentication
 - PostgreSQL with Sequelize ORM
 - OpenAPI/Swagger documentation
+- AWS S3 connection
+- Streaming-like data pull
+- Chunked insertions
